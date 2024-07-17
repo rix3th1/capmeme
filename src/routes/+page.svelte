@@ -4,6 +4,10 @@
 	import Home from '$lib/Home.svelte';
 </script>
 
+<svelte:head>
+	<title>Home</title>
+</svelte:head>
+
 <section>
 	<div class="fixed h-screen w-full bg-cover" style="background-image: url(/background.webp)">
 		<div

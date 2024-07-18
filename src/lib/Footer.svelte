@@ -8,7 +8,7 @@
 	<div class="flex flex-none items-center text-white/70">
 		Powered by <span class="mx-1 font-bold"> Grok</span>
 		and
-		<span class="ml-1 font-bold">node canvas</span>.
+		<span class="ml-1 font-bold">HTML 5 Canvas</span>.
 	</div>
 	<div class="mt-2 flex items-center md:mt-0">
 		<GitHubButton />

@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-
-	let canvas: HTMLCanvasElement;
+	import { canvas } from './stores';
 
 	const getMeme = async () => {
 		const res = await fetch('/api/meme');
@@ -39,7 +38,7 @@
 	onMount(async () => {
 		const [capInitMsg, agentMsg, capFinalMsg] = await getMeme();
 
-		const context = canvas.getContext('2d');
+		const context = $canvas.getContext('2d');
 
 		if (!context) {
 			throw new Error('Canvas context not found');
@@ -49,7 +48,7 @@
 		template.src = '/template.jpg';
 
 		template.onload = () => {
-			context.drawImage(template, 0, 0, canvas.width, canvas.height);
+			context.drawImage(template, 0, 0, $canvas.width, $canvas.height);
 
 			context.fillStyle = '#fff';
 			context.strokeStyle = '#000';
@@ -58,16 +57,16 @@
 			context.textAlign = 'center';
 			context.textBaseline = 'middle';
 
-			writeText(context, capInitMsg, canvas.width / 2, 200 - capInitMsg.length * 0.5, 500);
-			writeText(context, agentMsg, canvas.width / 4, 420 - agentMsg.length * 0.5, 250);
-			writeText(context, capFinalMsg, canvas.width / 1.3333, 420 - capFinalMsg.length * 0.5, 250);
+			writeText(context, capInitMsg, $canvas.width / 2, 200 - capInitMsg.length * 0.5, 500);
+			writeText(context, agentMsg, $canvas.width / 4, 420 - agentMsg.length * 0.5, 250);
+			writeText(context, capFinalMsg, $canvas.width / 1.3333, 420 - capFinalMsg.length * 0.5, 250);
 		};
 	});
 </script>
 
 <div class="flex w-full items-center justify-center">
 	<canvas
-		bind:this={canvas}
+		bind:this={$canvas}
 		class="background-animate w-11/12 rounded-lg border border-neutral-700/70 bg-gradient-to-br from-neutral-900 via-neutral-700 to-neutral-900 shadow-2xl transition-colors hover:border-neutral-700 md:w-1/2"
 		width="560"
 		height="701"

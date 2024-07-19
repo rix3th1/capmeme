@@ -1,21 +1,32 @@
 <script lang="ts">
 	import { canvas } from './stores';
 
-	const getCanvasImage = () => $canvas.toDataURL('image/png');
+	const getImage = () => {
+		const imageURL = $canvas.toDataURL();
+		const arrayBuffer = atob(imageURL.split(',')[1]);
+		const uint8Array = new Uint8Array(arrayBuffer.length);
+
+		for (let i = 0; i < arrayBuffer.length; i++) {
+			uint8Array[i] = arrayBuffer.charCodeAt(i);
+		}
+
+		return new Blob([uint8Array], { type: 'image/png' });
+	};
 
 	const shareMeme = () => {
-		const imageURL = getCanvasImage();
-
 		if (!navigator.share) {
 			alert('Your browser does not support the Web Share API');
 			return;
 		}
 
+		const memeImage = getImage();
+
 		try {
 			navigator.share({
 				title: 'Check out this meme!',
 				text: 'Here is a funny meme I generated with CapMeme.',
-				url: imageURL
+				url: 'https://capmeme.com',
+				files: [new File([memeImage], 'meme.png', { type: 'image/png' })]
 			});
 		} catch (error) {
 			console.error('Error sharing meme:', error);

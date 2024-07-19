@@ -25,7 +25,7 @@
 			navigator.share({
 				title: 'Check out this meme!',
 				text: 'Here is a funny meme I generated with CapMeme.',
-				url: 'https://capmeme.com',
+				url: 'https://capmeme.pro',
 				files: [new File([memeImage], 'meme.png', { type: 'image/png' })]
 			});
 		} catch (error) {

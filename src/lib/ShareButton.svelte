@@ -7,7 +7,8 @@
 		const imageURL = getCanvasImage();
 
 		if (!navigator.share) {
-			throw new Error('Your browser does not support the Web Share API');
+			alert('Your browser does not support the Web Share API');
+			return;
 		}
 
 		try {

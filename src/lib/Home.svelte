@@ -41,7 +41,8 @@
 		const context = $canvas.getContext('2d');
 
 		if (!context) {
-			throw new Error('Canvas context not found');
+			alert('Canvas context not found');
+			return;
 		}
 
 		const template = new Image();

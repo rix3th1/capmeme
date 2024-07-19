@@ -1,5 +1,6 @@
 <script>
 	import GitHubButton from './GitHubButton.svelte';
+	import ShareButton from './ShareButton.svelte';
 </script>
 
 <div
@@ -11,6 +12,7 @@
 		<span class="ml-1 font-bold">HTML 5 Canvas</span>.
 	</div>
 	<div class="mt-2 flex items-center md:mt-0">
+		<ShareButton />
 		<GitHubButton />
 	</div>
 </div>

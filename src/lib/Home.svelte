@@ -17,7 +17,7 @@
 	) => {
 		const words = text.split(' ');
 		let line = '';
-		const lineHeight = 24; // Adjust line height based on font size
+		const lineHeight = 24;
 
 		for (let i = 0; i < words.length; i++) {
 			const testLine = line + words[i] + ' ';

@@ -1,8 +1,8 @@
 <div>
 	<a
 		class="my-1 flex flex-none items-center rounded-full border border-white/50 bg-white/20 px-4 py-1 text-sm text-white shadow-sm transition-colors hover:bg-white/30"
-		href="https://github.com/rojasricor/capmeme"
-		aria-label="Star StephDietz/watch-this on GitHub"
+		href="https://github.com/rix3th1/capmeme"
+		aria-label="Star rix3th1/capmeme on GitHub"
 	>
 		<svg
 			xmlns="http://www.w3.org/2000/svg"

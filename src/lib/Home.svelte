@@ -2,42 +2,7 @@
 	import { onMount } from 'svelte';
 	import { canvas } from './stores';
 
-	const getMeme = async () => {
-		const res = await fetch('/api/meme');
-		return res.json();
-	};
-
-	const writeText = (
-		context: CanvasRenderingContext2D,
-		text: string,
-		x: number,
-		y: number,
-		maxWidth: number
-	) => {
-		const words = text.split(' ');
-		let line = '';
-		const lineHeight = 24;
-
-		for (let i = 0; i < words.length; i++) {
-			const testLine = line + words[i] + ' ';
-			const metrics = context.measureText(testLine);
-			const testWidth = metrics.width;
-			if (testWidth > maxWidth && i > 0) {
-				context.strokeText(line, x, y);
-				context.fillText(line, x, y);
-				line = words[i] + ' ';
-				y += lineHeight;
-			} else {
-				line = testLine;
-			}
-		}
-		context.strokeText(line, x, y);
-		context.fillText(line, x, y);
-	};
-
-	onMount(async () => {
-		const [capInitMsg, agentMsg, capFinalMsg] = await getMeme();
-
+	onMount(() => {
 		const context = $canvas.getContext('2d');
 
 		if (!context) {
@@ -48,21 +13,57 @@
 		const template = new Image();
 		template.src = '/template.jpg';
 
-		template.onload = () => {
-			context.drawImage(template, 0, 0, $canvas.width, $canvas.height);
-
-			context.fillStyle = '#fff';
-			context.strokeStyle = '#000';
-			context.lineWidth = 4;
-			context.font = 'bold 20px Impact';
-			context.textAlign = 'center';
-			context.textBaseline = 'middle';
-
-			writeText(context, capInitMsg, $canvas.width / 2, 200 - capInitMsg.length * 0.5, 500);
-			writeText(context, agentMsg, $canvas.width / 4, 420 - agentMsg.length * 0.5, 250);
-			writeText(context, capFinalMsg, $canvas.width / 1.3333, 420 - capFinalMsg.length * 0.5, 250);
-		};
+		template.addEventListener('load', () => drawMeme(template, context));
 	});
+
+	const drawMeme = async (template: HTMLImageElement, context: CanvasRenderingContext2D) => {
+		const [capInitMsg, agentMsg, capFinalMsg] = await getMeme();
+
+		context.drawImage(template, 0, 0, $canvas.width, $canvas.height);
+		context.fillStyle = '#fff';
+		context.strokeStyle = '#000';
+		context.lineWidth = 4;
+		context.font = 'bold 20px Impact';
+		context.textAlign = 'center';
+		context.textBaseline = 'middle';
+
+		drawText(context, capInitMsg, $canvas.width / 2, 200 - capInitMsg.length * 0.5, 500);
+		drawText(context, agentMsg, $canvas.width / 4, 420 - agentMsg.length * 0.5, 250);
+		drawText(context, capFinalMsg, $canvas.width / 1.3333, 420 - capFinalMsg.length * 0.5, 250);
+	};
+
+	const getMeme = async () => {
+		const res = await fetch('/api/meme');
+		return res.json();
+	};
+
+	const drawText = (
+		context: CanvasRenderingContext2D,
+		text: string,
+		x: number,
+		y: number,
+		maxWidth: number
+	) => {
+		const words = text.split(' ');
+		let line = '';
+		const LINE_HEIGHT = 24;
+
+		for (let i = 0; i < words.length; i++) {
+			const testLine = line + words[i] + ' ';
+			const metrics = context.measureText(testLine);
+			const testWidth = metrics.width;
+			if (testWidth > maxWidth && i > 0) {
+				context.strokeText(line, x, y);
+				context.fillText(line, x, y);
+				line = words[i] + ' ';
+				y += LINE_HEIGHT;
+			} else {
+				line = testLine;
+			}
+		}
+		context.strokeText(line, x, y);
+		context.fillText(line, x, y);
+	};
 </script>
 
 <div class="flex w-full items-center justify-center">

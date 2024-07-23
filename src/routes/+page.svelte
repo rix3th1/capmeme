@@ -11,7 +11,7 @@
 <section>
 	<div class="fixed h-screen w-full bg-cover" style="background-image: url(/background.webp)">
 		<div
-			class="flex h-full min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-slate-900/80 to-black/90 backdrop-blur-sm md:backdrop-blur-none"
+			class="flex h-full min-h-screen w-full flex-col items-center justify-center bg-gradient-to-br from-slate-950/80 to-black/90 backdrop-blur-sm md:backdrop-blur-none"
 		/>
 	</div>
 
@@ -23,9 +23,7 @@
 		>
 			<Home />
 		</div>
-		<div class="mx-auto w-full max-w-4xl">
-			<div class="w-full" />
-		</div>
+
 		<Footer />
 	</div>
 </section>

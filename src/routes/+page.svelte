@@ -15,7 +15,7 @@
 		/>
 	</div>
 
-	<div class="overflor-auto absolute inset-0 flex h-screen flex-col px-6">
+	<div class="absolute inset-0 flex h-screen flex-col overflow-hidden px-6">
 		<Header />
 
 		<div

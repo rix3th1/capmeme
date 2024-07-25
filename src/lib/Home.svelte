@@ -17,19 +17,25 @@
 	});
 
 	const drawMeme = async (template: HTMLImageElement, context: CanvasRenderingContext2D) => {
-		const [capInitMsg, agentMsg, capFinalMsg] = await getMeme();
+		try {
+			const [capInitMsg, agentMsg, capFinalMsg] = await getMeme();
 
-		context.drawImage(template, 0, 0, $canvas.width, $canvas.height);
-		context.fillStyle = '#fff';
-		context.strokeStyle = '#000';
-		context.lineWidth = 4;
-		context.font = 'bold 20px Impact';
-		context.textAlign = 'center';
-		context.textBaseline = 'middle';
+			context.drawImage(template, 0, 0, $canvas.width, $canvas.height);
+			context.fillStyle = '#fff';
+			context.strokeStyle = '#000';
+			context.lineWidth = 4;
+			context.font = 'bold 20px Impact';
+			context.textAlign = 'center';
+			context.textBaseline = 'middle';
 
-		drawText(context, capInitMsg, $canvas.width / 2, 200 - capInitMsg.length * 0.5, 500);
-		drawText(context, agentMsg, $canvas.width / 4, 420 - agentMsg.length * 0.5, 250);
-		drawText(context, capFinalMsg, $canvas.width / 1.3333, 420 - capFinalMsg.length * 0.5, 250);
+			drawText(context, capInitMsg, $canvas.width / 2, 200 - capInitMsg.length * 0.5, 500);
+			drawText(context, agentMsg, $canvas.width / 4, 420 - agentMsg.length * 0.5, 250);
+			drawText(context, capFinalMsg, $canvas.width / 1.3333, 420 - capFinalMsg.length * 0.5, 250);
+		} catch (error) {
+			if (confirm('Error fetching meme, reload?')) {
+				window.location.reload();
+			}
+		}
 	};
 
 	const getMeme = async () => {

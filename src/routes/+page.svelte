@@ -24,6 +24,9 @@
 			<Home />
 		</div>
 
+		<div class="mx-auto w-full max-w-4xl">
+			<div class="w-full" />
+		</div>
 		<Footer />
 	</div>
 </section>

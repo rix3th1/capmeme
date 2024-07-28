@@ -15,7 +15,7 @@
 		/>
 	</div>
 
-	<div class="absolute inset-0 flex h-screen flex-col overflow-hidden px-6">
+	<div class="absolute inset-0 flex h-screen flex-col overflow-y-auto px-6 md:overflow-y-hidden">
 		<Header />
 
 		<div
@@ -24,9 +24,6 @@
 			<Home />
 		</div>
 
-		<div class="mx-auto w-full max-w-4xl">
-			<div class="w-full" />
-		</div>
 		<Footer />
 	</div>
 </section>
